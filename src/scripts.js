@@ -59,12 +59,12 @@ $.fn.weather = function(direction = 'up', arr) {
         const moveDown = clicked.attr('offsetBottom') - bottom.attr('offsetBottom');
         const moveUp = (clicked.offset().bottom + clicked.outerHeight()) - (previous.offset().bottom + previous.outerHeight());
 
-        clicked.css('position', 'relative');
+        clicked.css({'position': 'relative', 'visibility': 'hidden'});
         nextAll.css('position', 'relative');
         clicked.animate({'bottom': moveDown});
         nextAll.animate({'bottom': -moveUp}, {complete: function() {
           clicked.parent().append(clicked);
-          clicked.css({'position': 'static', 'bottom': 0});
+          clicked.css({'position': 'static', 'bottom': 0, 'visibility': 'visible'});
           nextAll.css({'position': 'static', 'bottom': 0});
         }});
       }
@@ -78,12 +78,12 @@ $.fn.weather = function(direction = 'up', arr) {
         const moveUp = clicked.attr('offsetTop') - top.attr('offsetTop');
         const moveDown = (clicked.offset().top + clicked.outerHeight()) - (previous.offset().top + previous.outerHeight());
 
-        clicked.css('position', 'relative');
+        clicked.css({'position': 'relative', 'visibility': 'hidden'});
         previousAll.css('position', 'relative');
         clicked.animate({'top': -moveUp});
         previousAll.animate({'top': moveDown}, {complete: function() {
           clicked.parent().prepend(clicked);
-          clicked.css({'position': 'static', 'top': 0});
+          clicked.css({'position': 'static', 'top': 0, 'visibility': 'visible'});
           previousAll.css({'position': 'static', 'top': 0});
         }});
       }
