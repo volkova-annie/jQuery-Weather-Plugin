@@ -48,10 +48,9 @@ $.fn.weather = function(direction = 'up', arr) {
   })
 
   $listItems.click(function() {
+    $(this).parent().prepend(this);
     if (direction === 'down') {
       $(this).parent().append(this);
-    } else {
-      $(this).parent().prepend(this);
     }
   });
 
