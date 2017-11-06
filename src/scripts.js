@@ -53,25 +53,4 @@ $.fn.weather = function(direction = 'up', arr) {
       $(this).parent().append(this);
     }
   });
-
-  // $listItems.click(function() {
-  //   const clicked = $(this);
-  //   const previousAll = clicked.prevAll();
-  //
-  //   if (previousAll.length > 0) {
-  //     const top = $(previousAll[previousAll.length - 1]);
-  //     const previous = $(previousAll[0]);
-  //     const moveUp = clicked.attr('offsetTop') - top.attr('offsetTop');
-  //     const moveDown = (clicked.offset().top + clicked.outerHeight()) - (previous.offset().top + previous.outerHeight());
-  //
-  //     clicked.css('position', 'relative');
-  //     previousAll.css('position', 'relative');
-  //     clicked.animate({'top': -moveUp});
-  //     previousAll.animate({'top': moveDown}, {complete: function() {
-  //       clicked.parent().prepend(clicked);
-  //       clicked.css({'position': 'static', 'top': 0});
-  //       previousAll.css({'position': 'static', 'top': 0});
-  //     }});
-  //   }
-  // });
 }
