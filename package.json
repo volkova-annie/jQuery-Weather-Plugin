@@ -1,0 +1,21 @@
+{
+  "name": "jQuery-plugin",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Annie",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "browser-sync": "^2.18.13",
+    "jquery": "^3.2.1",
+    "webpack": "^3.8.1"
+  },
+  "scripts": {
+    "bs": "node browser-sync",
+    "webpack:dev": "webpack --config ./webpack.config.js -w",
+    "dev": "yarn webpack:dev & yarn bs"
+  }
+}
