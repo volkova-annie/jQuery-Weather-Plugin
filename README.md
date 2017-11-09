@@ -13,3 +13,8 @@ Default array of cities - ['Amsterdam', 'Bangkok', 'Vienna', 'Munich', 'Geneva',
 
 You can try with this array - ['Moscow', 'Kiev', 'Petersburg', 'Sochi', 'Habarovsk']
 
+Notification:
+
+http://openweathermap.org/price - with a free API key no more than 60 calls per minute
+
+There are 10 cities in default array (10 calls)
