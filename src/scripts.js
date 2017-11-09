@@ -1,8 +1,7 @@
 // const text = ['Moscow', 'Kiev', 'Petersburg', 'Sochi', 'Habarovsk'];
 
 $.fn.weather = function(direction = 'up', arr) {
-  const defaultCities = ['Vienna'];
-  // const defaultCities = ['Amsterdam', 'Bangkok', 'Vienna', 'Munich', 'Geneva', 'Lisbon', 'Mexico', 'Oslo', 'Tallinn', 'Paris'];
+  const defaultCities = ['Amsterdam', 'Bangkok', 'Vienna', 'Munich', 'Geneva', 'Lisbon', 'Mexico', 'Oslo', 'Tallinn', 'Paris'];
   const key = 'b84d6e69b39e4433a5ec8239e157c1d5';
   const citiesArray = arr || defaultCities;
   const citiesCollection = {};
@@ -31,10 +30,10 @@ $.fn.weather = function(direction = 'up', arr) {
   const citiesForRequests = citiesArray.filter((el) => citiesCollection[el].finded);
   citiesForRequests.forEach((city) => {
     const key = 'a44c2dfef327274d80867c1acd316197';
+    const url = `//api.openweathermap.org/data/2.5/weather?appid=${key}&q=${city}&units=metric`;
     // const key = 'b84d6e69b39e4433a5ec8239e157c1d5';
-    const cnt = 1;
-    const url = `//api.openweathermap.org/data/2.5/forecast/daily?appid=${key}&q=${city}&units=metric&cnt=${cnt}`;
-    // const url = `//api.openweathermap.org/data/2.5/weather?appid=${key}&q=${city}&units=metric`;
+    // const cnt = 1;
+    // const url = `//api.openweathermap.org/data/2.5/forecast/daily?appid=${key}&q=${city}&units=metric&cnt=${cnt}`;
 
     $.getJSON(url, (data) => {
       const $li = $('.list__item').filter(function(){
