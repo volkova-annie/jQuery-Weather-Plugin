@@ -1,16 +1,27 @@
-// const text = ['Moscow', 'Kiev', 'Petersburg', 'Sochi', 'Habarovsk'];
+// const text = ['Moscow', 'Petersburg', 'Khabarovsk', 'Sochi'];
 
-$.fn.weather = function(direction = 'up', arr) {
-  const defaultCities = ['Amsterdam', 'Bangkok', 'Vienna', 'Munich', 'Geneva', 'Lisbon', 'Mexico', 'Oslo', 'Tallinn', 'Paris'];
+$.fn.weather = function(opt) {
+  const opts = typeof opt === 'string'
+    ? {direction: opt}
+    : opt
+  const defaultOptions = {
+    cities: ['Amsterdam', 'Bangkok', 'Vienna', 'München', 'Geneva', 'Lisbon', 'Mexico', 'Oslo', 'Tallinn', 'Paris'],
+    direction: 'up',
+  };
+  const options = Object.assign({}, defaultOptions, opts);
   const key = 'b84d6e69b39e4433a5ec8239e157c1d5';
-  const citiesArray = arr || defaultCities;
+  const citiesArray = options.cities;
+  const direction = options.direction;
   const citiesCollection = {};
 
   citiesArray.forEach((el) => {
     citiesCollection[el] = {};
   });
 
-  const $listItems =  this.find('.list__item');
+  const $listItems =  this.find('li');
+
+  this.off('click.weatherAnimation', 'li');
+  this.on('click.weatherAnimation', 'li' , animateElement);
 
   $listItems.each(function() {
     const $this = $(this);
@@ -18,6 +29,7 @@ $.fn.weather = function(direction = 'up', arr) {
     const cities = citiesArray.map((city) => ({city: city, index: itemText.indexOf(city)}));
     const indexes = cities.map((el) => el.index)
       .filter(index => index >= 0);
+      console.log(indexes);
     const minIndex =  Math.min.apply(null, indexes);
     const city = cities.find((el) => el.index === minIndex);
 
@@ -36,15 +48,15 @@ $.fn.weather = function(direction = 'up', arr) {
     // const url = `//api.openweathermap.org/data/2.5/forecast/daily?appid=${key}&q=${city}&units=metric&cnt=${cnt}`;
 
     $.getJSON(url, (data) => {
-      const $li = $('.list__item').filter(function(){
+      const $li = $('li').filter(function(){
         return $(this).data('city') === city;
       });
       $li.each(function(){
         const $li = $(this);
         const text = $li.html();
 
-        const temp = data.list[0].temp.day.toFixed();
-        // const temp = data.main.temp.toFixed();
+        // const temp = data.list[0].temp.day.toFixed();
+        const temp = data.main.temp.toFixed();
         const pattern = new RegExp(`(<strong>)?(${city})(\\s\\/\\s-?\\d+)?(<\\/strong>)?`, 'g');
         const newText = text.replace(pattern, `<strong>$2 / ${temp}</strong>`);
         $li.html(newText);
@@ -52,7 +64,7 @@ $.fn.weather = function(direction = 'up', arr) {
     })
   })
 
-  $listItems.click(function() {
+  function animateElement() {
     const clicked = $(this);
     clicked.css({position: 'relative'});
 
@@ -96,5 +108,5 @@ $.fn.weather = function(direction = 'up', arr) {
         });
       }
     }
-  });
+  }
 }
